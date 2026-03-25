@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDL Course Examples: Before & After</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.4em;
+            opacity: 0.95;
+        }
+        
+        .example-set {
+            margin-bottom: 60px;
+        }
+        
+        .example-title {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 30px;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .course-mockup {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        
+        .mockup-header {
+            padding: 20px;
+            font-weight: bold;
+            font-size: 1.3em;
+            text-align: center;
+        }
+        
+        .before .mockup-header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+        }
+        
+        .after .mockup-header {
+            background: linear-gradient(135deg, #51cf66, #37b24d);
+            color: white;
+        }
+        
+        .mockup-content {
+            padding: 30px;
+            min-height: 400px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .canvas-header {
+            background: #394b59;
+            color: white;
+            padding: 12px 20px;
+            font-size: 0.9em;
+            margin: -30px -30px 20px -30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .canvas-nav {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+        }
+        
+        .page-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e2e8f0;
+        }
+        
+        .content-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid #cbd5e0;
+        }
+        
+        .before .content-section {
+            border-left-color: #fc8181;
+        }
+        
+        .after .content-section {
+            border-left-color: #68d391;
+        }
+        
+        .section-heading {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        
+        .messy-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .messy-links li {
+            margin: 8px 0;
+            color: #3182ce;
+            text-decoration: underline;
+        }
+        
+        .organized-section {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .format-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .format-badge {
+            background: #edf2f7;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 2px solid #cbd5e0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .after .format-badge {
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+        
+        .assignment-box {
+            background: #fff5f5;
+            border: 2px solid #feb2b2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .after .assignment-box {
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+        
+        .warning-text {
+            color: #c53030;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .choice-text {
+            color: #2f855a;
+            font-weight: bold;
+        }
+        
+        .instruction-list {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .instruction-list li {
+            margin: 8px 0;
+        }
+        
+        .deadline-box {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 12px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .module-structure {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .module-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f7fafc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon-badge {
+            font-size: 1.3em;
+        }
+        
+        .annotation {
+            background: #fff3bf;
+            border-left: 4px solid #fab005;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+            font-style: italic;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 1200px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Real Course Examples: Before & After UDL</h1>
+            <p>See what UDL actually looks like in practice</p>
+        </div>
+        
+        <!-- EXAMPLE 1: COURSE HOMEPAGE -->
+        <div class="example-set">
+            <div class="example-title">📚 Example 1: Course Homepage</div>
+            
+            <div class="comparison">
+                <!-- BEFORE -->
+                <div class="course-mockup before">
+                    <div class="mockup-header">❌ BEFORE: Fragmented & Confusing</div>
+                    <div class="mockup-content">
+                        <div class="canvas-header">
+                            <span>📘 PSYC 101: Introduction to Psychology</span>
+                            <div class="canvas-nav">
+                                <span>Home</span>
+                                <span>Modules</span>
+                                <span>Assignments</span>
+                            </div>
+                        </div>
+                        
+                        <div class="page-title">Welcome to PSYC 101</div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Course Materials</div>
+                            <ul class="messy-links">
+                                <li>Syllabus (Google Doc)</li>
+                                <li>Lecture slides (Dropbox - check your email for link)</li>
+                                <li>Readings (links posted weekly in Announcements)</li>
+                                <li>Discussion forums (external site - login required)</li>
+                                <li>Videos (YouTube playlist - link TBA)</li>
+                                <li>Office hours signup (Calendly link in week 1 module)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Important Notes</div>
+                            <p>Make sure to check multiple places for updates:</p>
+                            <ul style="margin-top: 10px; padding-left: 20px;">
+                                <li>Email for assignment changes</li>
+                                <li>Announcements for reading links</li>
+                                <li>Modules for some files</li>
+                                <li>Files section for others</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>❌ The Problems:</strong> Content scattered across 5+ platforms • Students must check multiple locations • No predictable structure • Requires remembering different logins • Cognitive overload for ALL students
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AFTER -->
+                <div class="course-mockup after">
+                    <div class="mockup-header">✅ AFTER: Consolidated & Clear</div>
+                    <div class="mockup-content">
+                        <div class="canvas-header">
+                            <span>📘 PSYC 101: Introduction to Psychology</span>
+                            <div class="canvas-nav">
+                                <span>Home</span>
+                                <span>Modules</span>
+                                <span>Assignments</span>
+                            </div>
+                        </div>
+                        
+                        <div class="page-title">Welcome to PSYC 101 - Everything You Need is Here!</div>
+                        
+                        <div class="organized-section">
+                            <div class="section-heading">✅ Your Weekly Structure (Same Every Week)</div>
+                            <div class="module-structure">
+                                <div class="module-item">
+                                    <span class="icon-badge">📖</span>
+                                    <span><strong>Step 1:</strong> Read This Week's Overview (always at the top)</span>
+                                </div>
+                                <div class="module-item">
+                                    <span class="icon-badge">🎥</span>
+                                    <span><strong>Step 2:</strong> Watch Lecture (video + transcript + slides all in one place)</span>
+                                </div>
+                                <div class="module-item">
+                                    <span class="icon-badge">📚</span>
+                                    <span><strong>Step 3:</strong> Complete Readings (PDF + audio versions available)</span>
+                                </div>
+                                <div class="module-item">
+                                    <span class="icon-badge">✍️</span>
+                                    <span><strong>Step 4:</strong> Submit Weekly Assignment (flexible format options)</span>
+                                </div>
+                                <div class="module-item">
+                                    <span class="icon-badge">💬</span>
+                                    <span><strong>Step 5:</strong> Participate in Discussion (right here in Canvas)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="organized-section">
+                            <div class="section-heading">📌 Everything in ONE Place</div>
+                            <p><strong>All course materials are in Canvas Modules.</strong> No need to check email, external sites, or multiple platforms. If you need it, it's in your weekly module.</p>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>✅ The Solutions:</strong> All content in ONE location • Predictable weekly structure • Clear navigation • No hunting for materials • Reduced cognitive load for everyone
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- EXAMPLE 2: ASSIGNMENT PAGE -->
+        <div class="example-set">
+            <div class="example-title">📝 Example 2: Assignment - Climate Change Research</div>
+            
+            <div class="comparison">
+                <!-- BEFORE -->
+                <div class="course-mockup before">
+                    <div class="mockup-header">❌ BEFORE: Single Path, Rigid Format</div>
+                    <div class="mockup-content">
+                        <div class="page-title">Week 5 Assignment: Climate Change Essay</div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Assignment Instructions</div>
+                            <p>Write a 1500-word essay analyzing the impacts of climate change on global ecosystems.</p>
+                            
+                            <div class="assignment-box">
+                                <p><span class="warning-text">Requirements:</span></p>
+                                <ul class="instruction-list">
+                                    <li>Must be in 5-paragraph essay format</li>
+                                    <li>Times New Roman, 12pt font, double-spaced</li>
+                                    <li>Submit as a Word document (.docx only)</li>
+                                    <li>Minimum 5 academic sources</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="deadline-box">
+                                ⏰ <strong>Due:</strong> Friday, 11:59 PM (no extensions)
+                            </div>
+                            
+                            <p style="margin-top: 20px;"><strong>Grading:</strong> Essays that do not follow the 5-paragraph format will receive a maximum grade of C.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Resources</div>
+                            <p>Read Chapter 8 in your textbook (PDF posted in Week 5 module)</p>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>❌ The Problems:</strong> Only ONE format accepted • No choice in expression • Talented students who struggle with traditional essays are excluded • Single resource type • Rigid deadline
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AFTER -->
+                <div class="course-mockup after">
+                    <div class="mockup-header">✅ AFTER: Multiple Paths, Flexible Expression</div>
+                    <div class="mockup-content">
+                        <div class="page-title">Week 5 Project: Climate Change Impact Analysis</div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Learning Objectives</div>
+                            <p>By completing this project, you will demonstrate your ability to:</p>
+                            <ul class="instruction-list">
+                                <li>Analyze the scientific evidence for climate change impacts</li>
+                                <li>Evaluate effects on global ecosystems</li>
+                                <li>Synthesize information from multiple credible sources</li>
+                                <li>Communicate complex scientific concepts effectively</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="assignment-box">
+                            <p><span class="choice-text">✅ CHOOSE YOUR FORMAT:</span> Select the format that best showcases your strengths. All options are assessed using the same rubric and learning objectives.</p>
+                            
+                            <div class="format-options">
+                                <div class="format-badge">📄 <strong>Option A:</strong> Written Research Paper (1500 words)</div>
+                                <div class="format-badge">🎨 <strong>Option B:</strong> Visual Infographic (with 500-word analysis)</div>
+                                <div class="format-badge">🎙️ <strong>Option C:</strong> Podcast Episode (10-12 minutes + transcript)</div>
+                                <div class="format-badge">📊 <strong>Option D:</strong> Slide Presentation (12-15 slides + speaker notes)</div>
+                            </div>
+                            
+                            <p style="margin-top: 15px;"><em>All formats must include minimum 5 credible sources and demonstrate mastery of learning objectives.</em></p>
+                        </div>
+                        
+                        <div class="organized-section">
+                            <div class="section-heading">📚 Resources (Choose What Works for You)</div>
+                            <div class="format-options">
+                                <div class="format-badge">📖 Chapter 8 Reading (PDF)</div>
+                                <div class="format-badge">🎧 Chapter 8 Audio Version</div>
+                                <div class="format-badge">🎥 Video Lecture with Captions</div>
+                                <div class="format-badge">📊 Visual Data Summary</div>
+                            </div>
+                        </div>
+                        
+                        <div class="deadline-box">
+                            ⏰ <strong>Flexible Deadline Options:</strong>
+                            <ul style="margin-top: 8px; padding-left: 20px;">
+                                <li><strong>Standard:</strong> Friday, 11:59 PM</li>
+                                <li><strong>Extended:</strong> Sunday, 11:59 PM (no penalty - just let me know by Wednesday)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>✅ The Solutions:</strong> Multiple expression formats • Same high standards, different paths • Resources in multiple formats • Flexible deadlines • Students showcase their strengths
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- EXAMPLE 3: COURSE CONTENT -->
+        <div class="example-set">
+            <div class="example-title">📖 Example 3: Weekly Content Delivery</div>
+            
+            <div class="comparison">
+                <!-- BEFORE -->
+                <div class="course-mockup before">
+                    <div class="mockup-header">❌ BEFORE: Single Format, Text-Heavy</div>
+                    <div class="mockup-content">
+                        <div class="page-title">Week 3: Cognitive Development</div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">This Week's Content</div>
+                            <p><strong>Required Reading:</strong></p>
+                            <ul class="messy-links">
+                                <li>Chapter 6: Cognitive Development (45 pages)</li>
+                                <li>Supplemental Article: "Piaget's Theory" (PDF, 18 pages)</li>
+                            </ul>
+                            
+                            <p style="margin-top: 20px;">Read all materials before class on Wednesday.</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <div class="section-heading">Lecture Notes</div>
+                            <p>See attached PowerPoint (posted after class)</p>
+                        </div>
+                        
+                        <div class="assignment-box">
+                            <p style="margin-bottom: 10px;">Complete the reading quiz by Tuesday at 11:59 PM.</p>
+                            <p style="font-size: 0.9em; color: #718096;"><em>Note: Quiz will only cover the readings - no other materials needed.</em></p>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>❌ The Problems:</strong> Only text-based materials • No alternatives for different learning styles • 63 pages of dense reading • No visual or audio options • One pathway to understanding
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AFTER -->
+                <div class="course-mockup after">
+                    <div class="mockup-header">✅ AFTER: Multiple Formats, Same Content</div>
+                    <div class="mockup-content">
+                        <div class="page-title">Week 3: Cognitive Development - Learn Your Way!</div>
+                        
+                        <div class="organized-section">
+                            <div class="section-heading">🎯 This Week's Learning Goals</div>
+                            <p>By the end of this week, you'll be able to:</p>
+                            <ul class="instruction-list">
+                                <li>Explain Piaget's stages of cognitive development</li>
+                                <li>Compare different theories of how children learn</li>
+                                <li>Apply cognitive development concepts to real scenarios</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="organized-section">
+                            <div class="section-heading">📚 Choose Your Learning Path (All cover the same content!)</div>
+                            
+                            <div class="module-structure">
+                                <div class="module-item">
+                                    <span class="icon-badge">🎥</span>
+                                    <div>
+                                        <strong>Video Lecture</strong> (25 min)<br>
+                                        <span style="font-size: 0.9em; color: #718096;">+ Full transcript + Closed captions + Visual slides</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="module-item">
+                                    <span class="icon-badge">🎧</span>
+                                    <div>
+                                        <strong>Audio Podcast</strong> (25 min)<br>
+                                        <span style="font-size: 0.9em; color: #718096;">Perfect for commuting or exercising</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="module-item">
+                                    <span class="icon-badge">📄</span>
+                                    <div>
+                                        <strong>Reading Option</strong> (15 pages)<br>
+                                        <span style="font-size: 0.9em; color: #718096;">Chapter 6 summary + key excerpts</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="module-item">
+                                    <span class="icon-badge">🎨</span>
+                                    <div>
+                                        <strong>Visual Infographic</strong><br>
+                                        <span style="font-size: 0.9em; color: #718096;">One-page summary with diagrams</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="module-item">
+                                    <span class="icon-badge">🎮</span>
+                                    <div>
+                                        <strong>Interactive Examples</strong><br>
+                                        <span style="font-size: 0.9em; color: #718096;">Practice applying concepts with scenarios</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p style="margin-top: 15px; padding: 12px; background: #fff3bf; border-radius: 6px;">
+                                💡 <strong>Pro Tip:</strong> Try mixing formats! Many students watch the video first, then review with the infographic.
+                            </p>
+                        </div>
+                        
+                        <div class="assignment-box">
+                            <p><strong>✅ Check Your Understanding:</strong></p>
+                            <p style="margin-top: 10px;">Complete the knowledge check (available all week) to make sure you're ready for the discussion. You can retake it as many times as needed!</p>
+                        </div>
+                        
+                        <div class="annotation">
+                            <strong>✅ The Solutions:</strong> Same content, 5 different formats • Students choose what works for their brain • Visual, auditory, reading, and interactive options • Accessible to all learning preferences
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

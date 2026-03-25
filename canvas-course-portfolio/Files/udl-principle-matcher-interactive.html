@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UDL Principle Matcher - Interactive Activity</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+padding: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.container {
+background: white;
+border-radius: 20px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+max-width: 900px;
+width: 100%;
+overflow: hidden;
+}
+.header {
+background: linear-gradient(135deg, #16697A 0%, #1a8ca0 100%);
+color: white;
+padding: 30px;
+text-align: center;
+}
+.header h1 {
+font-size: 2rem;
+margin-bottom: 10px;
+}
+.header p {
+opacity: 0.95;
+font-size: 1.1rem;
+}
+.progress-bar {
+background: #e0e0e0;
+height: 8px;
+border-radius: 4px;
+overflow: hidden;
+margin: 20px 30px 0 30px;
+}
+.progress-fill {
+background: linear-gradient(90deg, #27AE60, #2ecc71);
+height: 100%;
+width: 0%;
+transition: width 0.3s ease;
+}
+.content {
+padding: 40px;
+}
+.scenario-card {
+background: #f8f9fa;
+border-left: 5px solid #16697A;
+padding: 25px;
+border-radius: 10px;
+margin-bottom: 25px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.scenario-number {
+color: #16697A;
+font-weight: bold;
+font-size: 0.9rem;
+margin-bottom: 10px;
+}
+.scenario-text {
+font-size: 1.1rem;
+line-height: 1.6;
+color: #2c3e50;
+margin-bottom: 20px;
+}
+.principle-buttons {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 12px;
+margin-bottom: 15px;
+}
+.principle-btn {
+background: white;
+border: 3px solid #ddd;
+padding: 15px 20px;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.3s ease;
+font-size: 1rem;
+font-weight: 600;
+text-align: center;
+position: relative;
+}
+.principle-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.principle-btn.selected {
+background: #16697A;
+color: white;
+border-color: #16697A;
+}
+.principle-btn.correct {
+background: #27AE60;
+color: white;
+border-color: #27AE60;
+animation: pulse 0.5s ease;
+}
+.principle-btn.incorrect {
+background: #E74C3C;
+color: white;
+border-color: #E74C3C;
+animation: shake 0.5s ease;
+}
+.principle-btn:disabled {
+cursor: not-allowed;
+opacity: 0.6;
+}
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-10px); }
+75% { transform: translateX(10px); }
+}
+.submit-btn {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+padding: 15px 40px;
+border-radius: 10px;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+display: block;
+margin: 20px auto;
+transition: all 0.3s ease;
+}
+.submit-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+.submit-btn:disabled {
+background: #ccc;
+cursor: not-allowed;
+transform: none;
+}
+.feedback {
+background: white;
+border-radius: 10px;
+padding: 20px;
+margin-top: 20px;
+border-left: 5px solid #27AE60;
+display: none;
+}
+.feedback.show {
+display: block;
+animation: slideIn 0.4s ease;
+}
+.feedback.incorrect-feedback {
+border-left-color: #F39C12;
+}
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(-10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+.feedback-title {
+font-weight: bold;
+margin-bottom: 10px;
+font-size: 1.1rem;
+}
+.feedback-text {
+line-height: 1.6;
+color: #555;
+}
+.next-btn {
+background: #27AE60;
+color: white;
+border: none;
+padding: 12px 30px;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+margin-top: 15px;
+transition: all 0.3s ease;
+}
+.next-btn:hover {
+background: #229954;
+transform: translateY(-2px);
+}
+.results-card {
+text-align: center;
+padding: 40px;
+}
+.results-card h2 {
+color: #16697A;
+font-size: 2.5rem;
+margin-bottom: 20px;
+}
+.score-display {
+font-size: 4rem;
+font-weight: bold;
+color: #27AE60;
+margin: 30px 0;
+}
+.results-message {
+font-size: 1.3rem;
+color: #555;
+margin-bottom: 30px;
+}
+.restart-btn {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+padding: 15px 40px;
+border-radius: 10px;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+.restart-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+.principle-legend {
+background: #f0f7ff;
+padding: 20px;
+border-radius: 10px;
+margin-bottom: 30px;
+border: 2px solid #16697A;
+}
+.legend-title {
+font-weight: bold;
+color: #16697A;
+margin-bottom: 12px;
+font-size: 1.1rem;
+}
+.legend-item {
+margin: 8px 0;
+padding-left: 20px;
+position: relative;
+font-size: 0.95rem;
+}
+.legend-item:before {
+content: "→";
+position: absolute;
+left: 0;
+color: #16697A;
+font-weight: bold;
+}
+.stats {
+display: flex;
+justify-content: space-around;
+margin: 30px 0;
+flex-wrap: wrap;
+}
+.stat-item {
+text-align: center;
+padding: 15px;
+}
+.stat-number {
+font-size: 2rem;
+font-weight: bold;
+color: #16697A;
+}
+.stat-label {
+color: #777;
+font-size: 0.9rem;
+margin-top: 5px;
+}
+@media (max-width: 600px) {
+.container {
+margin: 10px;
+}
+.header h1 {
+font-size: 1.5rem;
+}
+.content {
+padding: 20px;
+}
+.principle-buttons {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>🎯 UDL Principle Matcher</h1>
+<p>Match each course design scenario to the UDL principle(s) it addresses</p>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<div class="content" id="activityContent">
+<div class="principle-legend">
+<div class="legend-title">📚 Quick Reference: The Three UDL Principles</div>
+<div class="legend-item"><strong>Representation:</strong> Multiple ways to ACCESS content (how info is presented)</div>
+<div class="legend-item"><strong>Action & Expression:</strong> Multiple ways to SHOW learning (how students demonstrate understanding)</div>
+<div class="legend-item"><strong>Engagement:</strong> Multiple ways to STAY MOTIVATED (choice, relevance, flexibility)</div>
+</div>
+<div id="questionContainer"></div>
+</div>
+</div>
+<script>
+const scenarios = [
+{
+text: "An instructor provides the week's lecture content in three formats: a written transcript, a 15-minute video with captions, and a podcast version.",
+correct: ["representation"],
+explanation: "This is <strong>Representation</strong> because it offers multiple ways for students to ACCESS the same content. Students can choose the format that works best for their learning style."
+},
+{
+text: "Students can demonstrate their understanding of photosynthesis by choosing between: writing a research paper, creating an illustrated diagram, producing a video explanation, or designing an infographic.",
+correct: ["action"],
+explanation: "This is <strong>Action & Expression</strong> because students can SHOW their learning in multiple ways. The learning objective is the same, but students express their understanding differently."
+},
+{
+text: "The instructor offers a choice board with 6 research topics. Students pick 2 that connect to their career interests or personal experiences.",
+correct: ["engagement"],
+explanation: "This is <strong>Engagement</strong> because it provides choice and relevance, which increases motivation. Students can connect learning to their own interests and goals."
+},
+{
+text: "All course materials, assignments, discussions, and grades are housed within Canvas—no external logins or platform-hopping required.",
+correct: ["representation", "action", "engagement"],
+explanation: "This addresses <strong>ALL THREE principles!</strong> Consolidated platforms reduce cognitive load (helping Representation), make it easier to submit work (Action & Expression), and reduce frustration (Engagement). This directly solves the platform fragmentation problem from Module 1."
+},
+{
+text: "The instructor provides key concepts both as a traditional outline AND as a visual mind map with color-coding and images.",
+correct: ["representation"],
+explanation: "This is <strong>Representation</strong> because it presents the same information in two different visual formats—one text-based, one graphic-based. Students can choose which format helps them understand better."
+},
+{
+text: "For the final project, students can work independently, with a partner, or in a small group of 3-4 people.",
+correct: ["engagement"],
+explanation: "This is <strong>Engagement</strong> because it provides flexibility in how students work, which addresses different social preferences and motivational needs. Some students thrive in groups, others prefer solo work."
+},
+{
+text: "Students can access course readings as standard PDFs, text-to-speech enabled documents, or large-print versions with adjustable fonts.",
+correct: ["representation"],
+explanation: "This is <strong>Representation</strong> because it provides the same content in multiple formats that accommodate different perceptual needs. Students can choose how they want to ACCESS the information."
+},
+{
+text: "The module includes self-paced checkpoints. Students who finish early can move ahead, while those who need more time can work at their own speed.",
+correct: ["engagement"],
+explanation: "This is <strong>Engagement</strong> because it provides flexibility in pacing, which honors different processing speeds and reduces anxiety. Students stay motivated when they're not forced into a one-size-fits-all timeline."
+},
+{
+text: "Students can demonstrate mastery of statistical concepts through: a traditional exam, a real-world data analysis project, a teaching portfolio, or a recorded presentation.",
+correct: ["action"],
+explanation: "This is <strong>Action & Expression</strong> because it offers multiple ways for students to SHOW what they've learned. The learning objectives remain the same, but students can express their knowledge differently."
+},
+{
+text: "Every video lecture includes captions, a transcript, and chapter markers so students can jump to specific topics.",
+correct: ["representation"],
+explanation: "This is <strong>Representation</strong> because it enhances how content is presented. Captions help students with hearing differences or who process text better; transcripts allow for different reading speeds; chapter markers support those who need to review specific concepts."
+},
+{
+text: "Students receive weekly progress reports showing their current standing, what's coming up next, and personalized suggestions for areas to review.",
+correct: ["engagement"],
+explanation: "This is <strong>Engagement</strong> because it provides feedback and scaffolding that helps students stay motivated and self-regulate their learning. Knowing where they stand reduces anxiety and helps them plan."
+},
+{
+text: "Complex instructions are provided in three ways: a written checklist, a video walkthrough of the assignment, and an annotated example of a completed project.",
+correct: ["representation"],
+explanation: "This is <strong>Representation</strong> because it presents instructions (content) in multiple formats. Students can choose to read the checklist, watch the video, or examine the example—or use all three for different purposes."
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let selectedPrinciples = [];
+
+function shuffleArray(array) {
+const shuffled = [...array];
+for (let i = shuffled.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+}
+return shuffled;
+}
+
+const shuffledScenarios = shuffleArray(scenarios);
+
+function renderQuestion() {
+const container = document.getElementById('questionContainer');
+const scenario = shuffledScenarios[currentQuestion];
+container.innerHTML = `
+<div class="scenario-card">
+<div class="scenario-number">Scenario ${currentQuestion + 1} of ${shuffledScenarios.length}</div>
+<div class="scenario-text">${scenario.text}</div>
+<p style="font-weight: 600; margin-bottom: 12px; color: #16697A;">Which UDL principle(s) does this address? (Select all that apply)</p>
+<div class="principle-buttons">
+<button class="principle-btn" data-principle="representation">
+📖 Representation
+</button>
+<button class="principle-btn" data-principle="action">
+✏️ Action & Expression
+</button>
+<button class="principle-btn" data-principle="engagement">
+🎯 Engagement
+</button>
+</div>
+<button class="submit-btn" id="submitBtn" disabled>Check My Answer</button>
+<div class="feedback" id="feedback"></div>
+</div>
+`;
+updateProgress();
+attachEventListeners();
+}
+
+function attachEventListeners() {
+const buttons = document.querySelectorAll('.principle-btn');
+const submitBtn = document.getElementById('submitBtn');
+
+buttons.forEach(btn => {
+btn.addEventListener('click', () => {
+const principle = btn.dataset.principle;
+if (btn.classList.contains('selected')) {
+btn.classList.remove('selected');
+selectedPrinciples = selectedPrinciples.filter(p => p !== principle);
+} else {
+btn.classList.add('selected');
+selectedPrinciples.push(principle);
+}
+submitBtn.disabled = selectedPrinciples.length === 0;
+});
+});
+
+submitBtn.addEventListener('click', checkAnswer);
+}
+
+function checkAnswer() {
+const scenario = shuffledScenarios[currentQuestion];
+const feedback = document.getElementById('feedback');
+const submitBtn = document.getElementById('submitBtn');
+const buttons = document.querySelectorAll('.principle-btn');
+
+buttons.forEach(btn => btn.disabled = true);
+submitBtn.disabled = true;
+
+const selectedSorted = [...selectedPrinciples].sort();
+const correctSorted = [...scenario.correct].sort();
+const isCorrect = JSON.stringify(selectedSorted) === JSON.stringify(correctSorted);
+
+buttons.forEach(btn => {
+const principle = btn.dataset.principle;
+if (scenario.correct.includes(principle)) {
+btn.classList.add('correct');
+} else if (selectedPrinciples.includes(principle)) {
+btn.classList.add('incorrect');
+}
+});
+
+if (isCorrect) {
+score++;
+feedback.className = 'feedback show';
+feedback.innerHTML = `
+<div class="feedback-title">✅ Correct!</div>
+<div class="feedback-text">${scenario.explanation}</div>
+<button class="next-btn" onclick="nextQuestion()">Next Scenario →</button>
+`;
+} else {
+feedback.className = 'feedback show incorrect-feedback';
+feedback.innerHTML = `
+<div class="feedback-title">📚 Not quite!</div>
+<div class="feedback-text">${scenario.explanation}</div>
+<button class="next-btn" onclick="nextQuestion()">Next Scenario →</button>
+`;
+}
+}
+
+function nextQuestion() {
+currentQuestion++;
+selectedPrinciples = [];
+if (currentQuestion < shuffledScenarios.length) {
+renderQuestion();
+} else {
+showResults();
+}
+}
+
+function updateProgress() {
+const progressFill = document.getElementById('progressFill');
+const percentage = ((currentQuestion + 1) / shuffledScenarios.length) * 100;
+progressFill.style.width = percentage + '%';
+}
+
+function showResults() {
+const container = document.getElementById('activityContent');
+const percentage = Math.round((score / shuffledScenarios.length) * 100);
+let message = '';
+let emoji = '';
+
+if (percentage >= 90) {
+message = 'Outstanding! You have a strong grasp of UDL principles!';
+emoji = '🌟';
+} else if (percentage >= 75) {
+message = 'Great work! You understand UDL principles well!';
+emoji = '🎉';
+} else if (percentage >= 60) {
+message = 'Good effort! Review the feedback to strengthen your understanding.';
+emoji = '👍';
+} else {
+message = 'Keep learning! Review the UDL principles and try again.';
+emoji = '📚';
+}
+
+container.innerHTML = `
+<div class="results-card">
+<h2>${emoji} Activity Complete!</h2>
+<div class="score-display">${percentage}%</div>
+<div class="stats">
+<div class="stat-item">
+<div class="stat-number">${score}</div>
+<div class="stat-label">Correct</div>
+</div>
+<div class="stat-item">
+<div class="stat-number">${shuffledScenarios.length - score}</div>
+<div class="stat-label">Missed</div>
+</div>
+<div class="stat-item">
+<div class="stat-number">${shuffledScenarios.length}</div>
+<div class="stat-label">Total</div>
+</div>
+</div>
+<div class="results-message">${message}</div>
+<button class="restart-btn" onclick="restartActivity()">Try Again 🔄</button>
+</div>
+`;
+}
+
+function restartActivity() {
+currentQuestion = 0;
+score = 0;
+selectedPrinciples = [];
+renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
